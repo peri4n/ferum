@@ -1,4 +1,4 @@
-use crate::sequence::Seq;
+use crate::bio::sequence::Seq;
 
 struct Alignment<'a> {
     seq1: &'a Seq,
