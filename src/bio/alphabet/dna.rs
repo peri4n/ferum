@@ -14,7 +14,7 @@ const NUCLEOTIDES4: [Nucleotides4; 4] = [
 pub struct Dna4;
 
 impl Dna4 {
-    pub(crate) fn new(symbols: Vec<char>) -> Seq<Dna4> {
+    pub fn new(symbols: Vec<char>) -> Seq<Dna4> {
         return Seq {
             alphabet: Dna4,
             residue: symbols,
