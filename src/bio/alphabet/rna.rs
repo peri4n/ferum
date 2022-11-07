@@ -1,6 +1,6 @@
 use crate::bio::alphabet::Alphabet;
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Eq, Debug)]
 pub enum RNuc4 { A, C, G, U }
 
 const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [

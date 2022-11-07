@@ -5,7 +5,7 @@ use crate::bio::alphabet::dna::Nuc4;
 use crate::bio::alphabet::rna::RNuc4;
 
 pub trait Alphabet {
-    type Elems;
+    type Elems: Eq;
 
     fn size(&self) -> usize;
 
