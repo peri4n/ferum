@@ -48,7 +48,7 @@ impl Seq<Dna4> {
 
 #[cfg(test)]
 mod tests {
-    use crate::bio::alphabet::dna::Nucleotides4::{A, C, G, T};
+    use crate::bio::alphabet::dna::Nuc4::{A, C, G, T};
     use crate::bio::alphabet::dna::Dna4;
 
     use super::Count;

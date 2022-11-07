@@ -1,7 +1,7 @@
-pub(crate) mod dna;
-pub(crate) mod rna;
+pub mod dna;
+pub mod rna;
 
-use crate::bio::alphabet::dna::Nucleotides4;
+use crate::bio::alphabet::dna::Nuc4;
 use crate::bio::alphabet::rna::RiboNucleotides4;
 
 pub trait Alphabet {
@@ -20,13 +20,13 @@ trait Transcribe<A, B> {
 
 struct Dna4ToRna4;
 
-impl Transcribe<Nucleotides4, RiboNucleotides4> for Dna4ToRna4 {
-    fn transcribe(symbol: Nucleotides4) -> RiboNucleotides4 {
+impl Transcribe<Nuc4, RiboNucleotides4> for Dna4ToRna4 {
+    fn transcribe(symbol: Nuc4) -> RiboNucleotides4 {
         match symbol {
-            Nucleotides4::A => RiboNucleotides4::A,
-            Nucleotides4::C => RiboNucleotides4::C,
-            Nucleotides4::G => RiboNucleotides4::G,
-            Nucleotides4::T => RiboNucleotides4::U
+            Nuc4::A => RiboNucleotides4::A,
+            Nuc4::C => RiboNucleotides4::C,
+            Nuc4::G => RiboNucleotides4::G,
+            Nuc4::T => RiboNucleotides4::U
         }
     }
 }
