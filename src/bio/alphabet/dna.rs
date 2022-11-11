@@ -11,6 +11,7 @@ const NUCLEOTIDES4: [Nuc4; 4] = [
     Nuc4::T
 ];
 
+#[derive(Debug)]
 pub struct Dna4;
 
 impl Dna4 {

@@ -1,6 +1,7 @@
 use crate::bio::alphabet::Alphabet;
 use crate::bio::alphabet::dna::Dna4;
 
+#[derive(Debug)]
 pub struct Seq<A: Alphabet> {
     pub alphabet: A,
     pub residue: Vec<char>,
@@ -19,12 +20,13 @@ impl <A: Alphabet> Seq<A> {
     pub fn at(&self, index: usize) -> A::Elems {
         A::char(self.residue[index])
     }
-}
 
-impl Seq<Dna4> {
     pub fn length(&self) -> usize {
         return self.residue.len();
     }
+}
+
+impl Seq<Dna4> {
 
     pub fn count(&self) -> Count {
         let mut a = 0;

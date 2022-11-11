@@ -1,3 +1,4 @@
 mod alignment;
-mod sequence;
 mod alphabet;
+mod sequence;
+mod util;
