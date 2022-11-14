@@ -59,8 +59,8 @@ mod tests {
 
     #[test]
     fn it_is_possible_to_create_an_alignment() {
-        let seq1 = Dna4::new(vec!['A', 'C', 'G', 'T']);
-        let seq2 = Dna4::new(vec!['A', 'C', 'G', 'T']);
+        let seq1 = Dna4::from("ACGT");
+        let seq2 = Dna4::from("ACGT");
         let distance = Basic::new(1, -1, 10);
 
         Global {
@@ -74,8 +74,8 @@ mod tests {
     #[test]
     fn create_alignment() {
         let distance = Basic::new(1, -1, -1);
-        let seq1 = Dna4::new(vec!['G', 'A', 'T', 'T', 'A', 'C', 'A']);
-        let seq2 = Dna4::new(vec!['G', 'C', 'A', 'T', 'G', 'C', 'G']);
+        let seq1 = Dna4::from("GATTACA");
+        let seq2 = Dna4::from("GCATGCG");
 
         let align = Global::align(
             &seq1,

@@ -21,6 +21,13 @@ impl Dna4 {
             residue: symbols,
         };
     }
+
+    pub fn from(symbols: &str) -> Seq<Dna4> {
+        return Seq {
+            alphabet: Dna4,
+            residue: symbols.chars().collect()
+        };
+    }
 }
 
 impl Alphabet for Dna4 {
