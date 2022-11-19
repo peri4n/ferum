@@ -1,4 +1,4 @@
-use crate::bio::alphabet::Alphabet;
+use crate::bio::alphabet::Finite;
 
 #[derive(PartialEq, Eq, Debug)]
 pub enum RNuc4 { A, C, G, U }
@@ -12,7 +12,7 @@ const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [
 
 pub struct Rna4;
 
-impl Alphabet for Rna4 {
+impl Finite for Rna4 {
     type Elems = RNuc4;
 
     fn size(&self) -> usize {
@@ -23,13 +23,13 @@ impl Alphabet for Rna4 {
         &RIBO_NUCLEOTIDES4
     }
 
-    fn char(symbol: char) -> RNuc4 {
+    fn char(&self, symbol: char) -> &RNuc4 {
         match symbol {
-            'a' | 'A' => RNuc4::A,
-            'c' | 'C' => RNuc4::C,
-            'g' | 'G' => RNuc4::G,
-            'u' | 'U' => RNuc4::U,
-            _ => RNuc4::A
+            'a' | 'A' => &RNuc4::A,
+            'c' | 'C' => &RNuc4::C,
+            'g' | 'G' => &RNuc4::G,
+            'u' | 'U' => &RNuc4::U,
+            _ => &RNuc4::A
         }
     }
 }

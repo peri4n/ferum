@@ -1,11 +1,11 @@
 use crate::bio::alphabet::dna::Dna4;
 use crate::bio::alphabet::rna::Rna4;
-use crate::bio::alphabet::Alphabet;
+use crate::bio::alphabet::Finite;
 
 #[derive(Debug)]
-pub struct Seq<A: Alphabet> {
+pub struct Seq<A: Finite> {
     pub alphabet: A,
-    pub residue: Vec<char>,
+    pub symbols: Vec<char>,
 }
 
 #[derive(PartialEq, Debug)]
@@ -17,13 +17,13 @@ pub struct Count {
     unknown: i32,
 }
 
-impl<A: Alphabet> Seq<A> {
-    pub fn at(&self, index: usize) -> A::Elems {
-        A::char(self.residue[index])
+impl<A: Finite> Seq<A> {
+    pub fn at(&self, index: usize) -> &A::Elems {
+        self.alphabet.char(self.symbols[index])
     }
 
     pub fn length(&self) -> usize {
-        return self.residue.len();
+        return self.symbols.len();
     }
 }
 
@@ -34,7 +34,7 @@ impl Seq<Dna4> {
         let mut g = 0;
         let mut t = 0;
         let mut unknown = 0;
-        for x in &self.residue {
+        for x in &self.symbols {
             match x {
                 'a' | 'A' => a += 1,
                 'c' | 'C' => c += 1,
@@ -55,8 +55,8 @@ impl Seq<Dna4> {
     pub fn transcribe(&self) -> Seq<Rna4> {
         Seq {
             alphabet: Rna4,
-            residue: self
-                .residue
+            symbols: self
+                .symbols
                 .iter()
                 .map(|c| match c {
                     'a' | 'A' => 't',
@@ -119,9 +119,9 @@ mod tests {
     fn is_accessible_by_index() {
         let seq = Dna4::new(vec!['A', 'C', 'G', 'T']);
 
-        assert_eq!(seq.at(0), A);
-        assert_eq!(seq.at(1), C);
-        assert_eq!(seq.at(2), G);
-        assert_eq!(seq.at(3), T);
+        assert_eq!(seq.at(0), &A);
+        assert_eq!(seq.at(1), &C);
+        assert_eq!(seq.at(2), &G);
+        assert_eq!(seq.at(3), &T);
     }
 }

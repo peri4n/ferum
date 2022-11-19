@@ -4,14 +4,36 @@ pub mod rna;
 use crate::bio::alphabet::dna::Nuc4;
 use crate::bio::alphabet::rna::RNuc4;
 
-pub trait Alphabet {
+pub trait Finite {
     type Elems: Eq;
 
-    fn size(&self) -> usize;
+    fn size(&self) -> usize {
+        self.elements().len()
+    }
 
     fn elements(&self) -> &[Self::Elems];
 
-    fn char(symbol: char) -> Self::Elems;
+    fn char(&self, symbol: char) -> &Self::Elems;
+
+    fn bits_per_element(&self) -> u32 {
+        self.size().ilog2()
+    }
+}
+
+pub struct Alphabet<'a> {
+    elements: &'a Vec<char>
+}
+
+impl <'a> Finite for Alphabet<'a> {
+    type Elems = char;
+
+    fn elements(&self) -> &[Self::Elems] {
+        &self.elements
+    }
+
+    fn char(&self, symbol: char) -> &Self::Elems {
+        self.elements.iter().find(|&s| *s == symbol).unwrap()
+    }
 }
 
 trait Transcribe<A, B> {

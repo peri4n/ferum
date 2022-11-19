@@ -1,4 +1,4 @@
-use crate::bio::alphabet::Alphabet;
+use crate::bio::alphabet::Finite;
 use crate::bio::sequence::Seq;
 
 #[derive(PartialEq, Eq, Debug)]
@@ -18,21 +18,22 @@ impl Dna4 {
     pub fn new(symbols: Vec<char>) -> Seq<Dna4> {
         return Seq {
             alphabet: Dna4,
-            residue: symbols,
+            symbols,
         };
     }
 
     pub fn from(symbols: &str) -> Seq<Dna4> {
         return Seq {
             alphabet: Dna4,
-            residue: symbols.chars().collect()
+            symbols: symbols.chars().collect(),
         };
     }
 }
 
-impl Alphabet for Dna4 {
+impl Finite for Dna4 {
     type Elems = Nuc4;
 
+    #[inline]
     fn size(&self) -> usize {
         4
     }
@@ -41,23 +42,27 @@ impl Alphabet for Dna4 {
         &NUCLEOTIDES4
     }
 
-    fn char(symbol: char) -> Nuc4 {
+    fn char(&self, symbol: char) -> &Nuc4 {
         match symbol {
-            'a' | 'A' => Nuc4::A,
-            'c' | 'C' => Nuc4::C,
-            'g' | 'G' => Nuc4::G,
-            't' | 'T' => Nuc4::T,
-            _ => Nuc4::A,
+            'a' | 'A' => &Nuc4::A,
+            'c' | 'C' => &Nuc4::C,
+            'g' | 'G' => &Nuc4::G,
+            't' | 'T' => &Nuc4::T,
+            _ => &Nuc4::A,
         }
+    }
+
+    #[inline]
+    fn bits_per_element(&self) -> u32 {
+        2
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::bio::alphabet::Alphabet;
-    use crate::bio::alphabet::dna::{NUCLEOTIDES4, Nuc4};
     use super::Dna4;
-
+    use crate::bio::alphabet::dna::{Nuc4, NUCLEOTIDES4};
+    use crate::bio::alphabet::Finite;
 
     #[test]
     fn standard_iupac_alphabet() {
@@ -69,9 +74,9 @@ mod tests {
     fn create_new_seq() {
         let seq = Dna4::new(vec!['a', 'c', 'g', 't']);
 
-        assert_eq!(seq.at(0), Nuc4::A);
-        assert_eq!(seq.at(1), Nuc4::C);
-        assert_eq!(seq.at(2), Nuc4::G);
-        assert_eq!(seq.at(3), Nuc4::T);
+        assert_eq!(seq.at(0), &Nuc4::A);
+        assert_eq!(seq.at(1), &Nuc4::C);
+        assert_eq!(seq.at(2), &Nuc4::G);
+        assert_eq!(seq.at(3), &Nuc4::T);
     }
 }
