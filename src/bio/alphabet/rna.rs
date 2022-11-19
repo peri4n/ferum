@@ -10,7 +10,7 @@ const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [
     RNuc4::U
 ];
 
-struct Rna4;
+pub struct Rna4;
 
 impl Alphabet for Rna4 {
     type Elems = RNuc4;
