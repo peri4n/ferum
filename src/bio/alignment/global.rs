@@ -29,8 +29,8 @@ where
     }
 
     pub fn align(seq1: &'a Seq<A>, seq2: &'a Seq<A>, metric: &'a D) -> Global<'a, A, D> {
-        let m = seq1.length() + 1;
-        let n = seq2.length() + 1;
+        let m = seq1.len() + 1;
+        let n = seq2.len() + 1;
         let mut matrix = Table::new(m, n);
 
         for i in 0..m {

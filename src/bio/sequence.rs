@@ -30,22 +30,48 @@ impl<'a, A: Alphabet> Index<usize> for Seq<'a, A> {
     }
 }
 
+pub struct SeqIter<'a, A: Alphabet> {
+    alphabet: &'a A,
+    inner: <Vec<char> as IntoIterator>::IntoIter
+}
+
+impl<'a, A: Alphabet> Iterator for SeqIter<'a, A> {
+    type Item = A::Elems;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.inner.next().map(|c| *self.alphabet.char(c))
+    }
+}
+
+impl<'a, A: Alphabet> IntoIterator for Seq<'a, A> {
+    type Item = A::Elems;
+
+    fn into_iter(self) -> Self::IntoIter {
+        SeqIter {
+            alphabet: self.alphabet,
+            inner: self.symbols.into_iter()
+        }
+    }
+
+    type IntoIter = SeqIter<'a, A>;
+}
+
 impl<'a, A: Alphabet> Seq<'a, A> {
-    pub fn length(&self) -> usize {
+    pub fn len(&self) -> usize {
         self.symbols.len()
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::bio::alphabet::dna::Nuc4::{A, C, G, T};
+    use crate::bio::alphabet::dna::Nuc4::*;
     use crate::bio::sequence::Seq;
 
     #[test]
     fn computes_the_length() {
         let seq: Seq<_> = "ACGT".into();
 
-        assert_eq!(seq.length(), 4);
+        assert_eq!(seq.len(), 4);
     }
 
     #[test]
@@ -56,5 +82,11 @@ mod tests {
         assert_eq!(seq[1], C);
         assert_eq!(seq[2], G);
         assert_eq!(seq[3], T);
+    }
+
+    #[test]
+    fn can_be_converted_to_an_iterator() {
+        let seq: Seq<_> = "ACGT".into();
+        assert_eq!(seq.into_iter().last(), Some(T));
     }
 }
