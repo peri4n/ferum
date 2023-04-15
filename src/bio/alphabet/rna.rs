@@ -1,4 +1,4 @@
-use crate::bio::alphabet::Finite;
+use super::Alphabet;
 
 #[derive(PartialEq, Eq, Debug)]
 pub enum RNuc4 { A, C, G, U }
@@ -12,12 +12,10 @@ const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [
 
 pub struct Rna4;
 
-impl Finite for Rna4 {
+impl Alphabet for Rna4 {
     type Elems = RNuc4;
 
-    fn size(&self) -> usize {
-        4
-    }
+    const SIZE: usize = 4;
 
     fn elements(&self) -> &[RNuc4] {
         &RIBO_NUCLEOTIDES4

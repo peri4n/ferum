@@ -1,9 +1,14 @@
+use std::ops::Index;
+
 use crate::bio::alphabet::dna::Dna4;
 use crate::bio::alphabet::rna::Rna4;
-use crate::bio::alphabet::Finite;
+use crate::bio::alphabet::Alphabet;
 
 #[derive(Debug)]
-pub struct Seq<A: Finite> {
+pub struct Seq<A>
+where
+    A: Alphabet,
+{
     pub alphabet: A,
     pub symbols: Vec<char>,
 }
@@ -17,7 +22,15 @@ pub struct Count {
     unknown: i32,
 }
 
-impl<A: Finite> Seq<A> {
+impl<A: Alphabet> Index<usize> for Seq<A> {
+    type Output = A::Elems;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        todo!()
+    }
+}
+
+impl<A: Alphabet> Seq<A> {
     pub fn at(&self, index: usize) -> &A::Elems {
         self.alphabet.char(self.symbols[index])
     }

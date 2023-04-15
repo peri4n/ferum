@@ -1,13 +1,13 @@
 use std::cmp::max;
 
-use crate::bio::alphabet::Finite;
+use crate::bio::alphabet::Alphabet;
 use crate::bio::sequence::Seq;
 use crate::bio::util::Table;
 
 use super::distance::Distance;
 
 #[derive(Debug)]
-pub struct Global<'a, A: Finite, D: Distance<A::Elems>> {
+pub struct Global<'a, A: Alphabet, D: Distance<A::Elems>> {
     seq1: &'a Seq<A>,
     seq2: &'a Seq<A>,
     metric: &'a D,
@@ -16,7 +16,7 @@ pub struct Global<'a, A: Finite, D: Distance<A::Elems>> {
 
 impl<'a, A, D> Global<'a, A, D>
 where
-    A: Finite,
+    A: Alphabet,
     D: Distance<A::Elems>,
 {
     fn new(seq1: &'a Seq<A>, seq2: &'a Seq<A>, metric: &'a D, score: i32) -> Self {

@@ -1,5 +1,5 @@
-use crate::bio::alphabet::Finite;
 use crate::bio::sequence::Seq;
+use super::Alphabet;
 
 #[derive(PartialEq, Eq, Debug)]
 pub enum Nuc4 {
@@ -30,13 +30,10 @@ impl Dna4 {
     }
 }
 
-impl Finite for Dna4 {
+impl Alphabet for Dna4 {
     type Elems = Nuc4;
 
-    #[inline]
-    fn size(&self) -> usize {
-        4
-    }
+    const SIZE: usize = 4;
 
     fn elements(&self) -> &[Nuc4] {
         &NUCLEOTIDES4
@@ -56,17 +53,18 @@ impl Finite for Dna4 {
     fn bits_per_element(&self) -> u32 {
         2
     }
+
 }
 
 #[cfg(test)]
 mod tests {
     use super::Dna4;
+    use crate::bio::alphabet::Alphabet;
     use crate::bio::alphabet::dna::{Nuc4, NUCLEOTIDES4};
-    use crate::bio::alphabet::Finite;
 
     #[test]
     fn standard_iupac_alphabet() {
-        assert_eq!(Dna4.size(), 4);
+        assert_eq!(Dna4::SIZE, 4);
         assert_eq!(Dna4.elements(), NUCLEOTIDES4);
     }
 
