@@ -1,13 +1,12 @@
 use std::ops::{IndexMut, Index};
 
-#[derive(Debug)]
 pub(crate) struct Table {
-    pub rows: usize,
-    pub cols: usize,
+    rows: usize,
+    cols: usize,
     elements: Vec<Vec<i32>>,
 }
 
-impl <'a> Index<usize> for Table {
+impl Index<usize> for Table {
     type Output = Vec<i32>;
 
     fn index(&self, row: usize) -> &Self::Output {
@@ -15,7 +14,7 @@ impl <'a> Index<usize> for Table {
     }
 }
 
-impl <'a> IndexMut<usize> for Table {
+impl IndexMut<usize> for Table {
     fn index_mut(&mut self, row: usize) -> &mut Self::Output {
         &mut self.elements[row]
     }
@@ -24,7 +23,7 @@ impl <'a> IndexMut<usize> for Table {
 impl Table {
     pub fn new(rows: usize, cols: usize) -> Self {
         let elements = (0..rows)
-            .map( |r| vec![0; cols])
+            .map(|_| vec![0; cols])
             .collect();
 
         Table {

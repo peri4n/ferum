@@ -1,4 +1,3 @@
-use crate::bio::sequence::Seq;
 use super::Alphabet;
 
 #[derive(PartialEq, Eq, Debug)]
@@ -13,22 +12,6 @@ pub(crate) const NUCLEOTIDES4: [Nuc4; 4] = [Nuc4::A, Nuc4::C, Nuc4::G, Nuc4::T];
 
 #[derive(Debug)]
 pub struct Dna4;
-
-impl Dna4 {
-    pub fn new(symbols: Vec<char>) -> Seq<Dna4> {
-        return Seq {
-            alphabet: Dna4,
-            symbols,
-        };
-    }
-
-    pub fn from(symbols: &str) -> Seq<Dna4> {
-        return Seq {
-            alphabet: Dna4,
-            symbols: symbols.chars().collect(),
-        };
-    }
-}
 
 impl Alphabet for Dna4 {
     type Elems = Nuc4;
@@ -61,6 +44,7 @@ mod tests {
     use super::Dna4;
     use crate::bio::alphabet::Alphabet;
     use crate::bio::alphabet::dna::{Nuc4, NUCLEOTIDES4};
+    use crate::bio::sequence::Seq;
 
     #[test]
     fn standard_iupac_alphabet() {
@@ -70,7 +54,7 @@ mod tests {
 
     #[test]
     fn create_new_seq() {
-        let seq = Dna4::new(vec!['a', 'c', 'g', 't']);
+        let seq: Seq<_> = "acgt".into();
 
         assert_eq!(seq.at(0), &Nuc4::A);
         assert_eq!(seq.at(1), &Nuc4::C);

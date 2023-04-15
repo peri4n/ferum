@@ -8,8 +8,8 @@ use super::distance::Distance;
 
 #[derive(Debug)]
 pub struct Global<'a, A: Alphabet, D: Distance<A::Elems>> {
-    seq1: &'a Seq<A>,
-    seq2: &'a Seq<A>,
+    seq1: &'a Seq<'a, A>,
+    seq2: &'a Seq<'a, A>,
     metric: &'a D,
     score: i32,
 }
@@ -20,12 +20,12 @@ where
     D: Distance<A::Elems>,
 {
     fn new(seq1: &'a Seq<A>, seq2: &'a Seq<A>, metric: &'a D, score: i32) -> Self {
-        return Global {
+        Global {
             seq1,
             seq2,
             metric,
             score,
-        };
+        }
     }
 
     pub fn align(seq1: &'a Seq<A>, seq2: &'a Seq<A>, metric: &'a D) -> Global<'a, A, D> {
@@ -43,7 +43,7 @@ where
 
         for i in 1..m {
             for j in 1..n {
-                let mat = matrix[i - 1][j - 1] + metric.cmp(&seq1.at(i - 1), &seq2.at(j - 1));
+                let mat = matrix[i - 1][j - 1] + metric.cmp(seq1.at(i - 1), seq2.at(j - 1));
                 let del = matrix[i - 1][j] + metric.indel();
                 let ins = matrix[i][j - 1] + metric.indel();
 
@@ -58,14 +58,12 @@ where
 #[cfg(test)]
 mod tests {
     use crate::bio::alignment::distance::Basic;
-    use crate::bio::alphabet::dna::Dna4;
-
     use super::Global;
 
     #[test]
     fn it_is_possible_to_create_an_alignment() {
-        let seq1 = Dna4::from("ACGT");
-        let seq2 = Dna4::from("ACGT");
+        let seq1 = "ACGT".into();
+        let seq2 = "ACGT".into();
         let distance = Basic::new(1, -1, 10);
 
         Global {
@@ -79,8 +77,8 @@ mod tests {
     #[test]
     fn create_alignment() {
         let distance = Basic::new(1, -1, -1);
-        let seq1 = Dna4::from("GATTACA");
-        let seq2 = Dna4::from("GCATGCG");
+        let seq1 = "GATTACA".into();
+        let seq2 = "GCATGCG".into();
 
         let align = Global::align(&seq1, &seq2, &distance);
 

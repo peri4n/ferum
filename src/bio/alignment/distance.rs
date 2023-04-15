@@ -18,20 +18,20 @@ pub struct Basic {
 
 impl Basic {
     pub fn new(same: i32, different: i32, indel: i32) -> Self {
-        return Basic {
+        Basic {
             same,
             different,
             indel,
-        };
+        }
     }
 }
 
 impl Distance<Nuc4> for Basic {
     fn cmp(&self, first: &Nuc4, second: &Nuc4) -> i32 {
         if *first == *second {
-            return self.same;
+            self.same
         } else {
-            return self.different;
+            self.different
         }
     }
 
