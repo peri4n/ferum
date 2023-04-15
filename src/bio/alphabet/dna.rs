@@ -31,12 +31,6 @@ impl Alphabet for Dna4 {
             _ => &Nuc4::A,
         }
     }
-
-    #[inline]
-    fn bits_per_element(&self) -> u32 {
-        2
-    }
-
 }
 
 #[cfg(test)]

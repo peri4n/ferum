@@ -42,19 +42,19 @@ impl<'a, A: Alphabet> Seq<'a, A> {
 
 #[cfg(test)]
 mod tests {
-    use crate::bio::alphabet::dna::Dna4;
     use crate::bio::alphabet::dna::Nuc4::{A, C, G, T};
+    use crate::bio::sequence::Seq;
 
     #[test]
     fn computes_the_length() {
-        let seq = Dna4::new(vec!['A', 'C', 'G', 'T']);
+        let seq: Seq<_> = "ACGT".into();
 
         assert_eq!(seq.length(), 4);
     }
 
     #[test]
     fn is_accessible_by_index() {
-        let seq = Dna4::new(vec!['A', 'C', 'G', 'T']);
+        let seq: Seq<_> = "ACGT".into();
 
         assert_eq!(seq.at(0), &A);
         assert_eq!(seq.at(1), &C);
