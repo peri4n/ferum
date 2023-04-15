@@ -36,8 +36,8 @@ impl Alphabet for Dna4 {
 #[cfg(test)]
 mod tests {
     use super::Dna4;
-    use crate::bio::alphabet::Alphabet;
     use crate::bio::alphabet::dna::{Nuc4, NUCLEOTIDES4};
+    use crate::bio::alphabet::Alphabet;
     use crate::bio::sequence::Seq;
 
     #[test]

@@ -1,14 +1,14 @@
 use super::Alphabet;
 
 #[derive(PartialEq, Eq, Debug)]
-pub enum RNuc4 { A, C, G, U }
+pub enum RNuc4 {
+    A,
+    C,
+    G,
+    U,
+}
 
-const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [
-    RNuc4::A,
-    RNuc4::C,
-    RNuc4::G,
-    RNuc4::U
-];
+const RIBO_NUCLEOTIDES4: [RNuc4; 4] = [RNuc4::A, RNuc4::C, RNuc4::G, RNuc4::U];
 
 pub struct Rna4;
 
@@ -27,8 +27,7 @@ impl Alphabet for Rna4 {
             'c' | 'C' => &RNuc4::C,
             'g' | 'G' => &RNuc4::G,
             'u' | 'U' => &RNuc4::U,
-            _ => &RNuc4::A
+            _ => &RNuc4::A,
         }
     }
 }
-

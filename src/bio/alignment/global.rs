@@ -47,7 +47,7 @@ where
                 let del = matrix[i - 1][j] + metric.indel();
                 let ins = matrix[i][j - 1] + metric.indel();
 
-                matrix[i][j] =  max(ins, max(mat, del));
+                matrix[i][j] = max(ins, max(mat, del));
             }
         }
 
@@ -57,8 +57,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::bio::alignment::distance::Basic;
     use super::Global;
+    use crate::bio::alignment::distance::Basic;
 
     #[test]
     fn it_is_possible_to_create_an_alignment() {

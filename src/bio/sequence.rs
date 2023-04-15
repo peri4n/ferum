@@ -17,7 +17,7 @@ impl<'a> From<&str> for Seq<'a, Dna4> {
     fn from(str: &str) -> Self {
         Seq {
             alphabet: &Dna4,
-            symbols: str.to_string().chars().collect()
+            symbols: str.to_string().chars().collect(),
         }
     }
 }

@@ -1,4 +1,4 @@
-use std::ops::{IndexMut, Index};
+use std::ops::{Index, IndexMut};
 
 pub(crate) struct Table {
     rows: usize,
@@ -22,9 +22,7 @@ impl IndexMut<usize> for Table {
 
 impl Table {
     pub fn new(rows: usize, cols: usize) -> Self {
-        let elements = (0..rows)
-            .map(|_| vec![0; cols])
-            .collect();
+        let elements = (0..rows).map(|_| vec![0; cols]).collect();
 
         Table {
             rows,
