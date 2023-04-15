@@ -17,6 +17,8 @@ impl Alphabet for Rna4 {
 
     const SIZE: usize = 4;
 
+    const BITS_PER_ELEMENT: usize = 2;
+
     fn elements(&self) -> &[RNuc4] {
         &RIBO_NUCLEOTIDES4
     }

@@ -18,6 +18,8 @@ impl Alphabet for Dna4 {
 
     const SIZE: usize = 4;
 
+    const BITS_PER_ELEMENT: usize = 2;
+
     fn elements(&self) -> &[Nuc4] {
         &NUCLEOTIDES4
     }

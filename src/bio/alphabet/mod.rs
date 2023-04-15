@@ -6,7 +6,7 @@ pub trait Alphabet {
 
     const SIZE: usize;
 
-    const BITS_PER_ELEMENT: usize = Self::SIZE.ilog2() as usize;
+    const BITS_PER_ELEMENT: usize;
 
     fn elements(&self) -> &[Self::Elems];
 
