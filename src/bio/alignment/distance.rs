@@ -4,7 +4,7 @@ pub trait Distance<A>
 where
     A: Eq,
 {
-    fn cmp(&self, first: &A, second: &A) -> i32;
+    fn cmp(&self, first: A, second: A) -> i32;
 
     fn indel(&self) -> i32;
 }
@@ -27,8 +27,8 @@ impl Basic {
 }
 
 impl Distance<Nuc4> for Basic {
-    fn cmp(&self, first: &Nuc4, second: &Nuc4) -> i32 {
-        if *first == *second {
+    fn cmp(&self, first: Nuc4, second: Nuc4) -> i32 {
+        if first == second {
             self.same
         } else {
             self.different
@@ -50,14 +50,14 @@ mod tests {
         let distance = Basic::new(1, -1, 10);
         assert_eq!(distance.indel(), 10);
 
-        assert_eq!(distance.cmp(&A, &A), 1);
-        assert_eq!(distance.cmp(&C, &C), 1);
-        assert_eq!(distance.cmp(&G, &G), 1);
-        assert_eq!(distance.cmp(&T, &T), 1);
+        assert_eq!(distance.cmp(A, A), 1);
+        assert_eq!(distance.cmp(C, C), 1);
+        assert_eq!(distance.cmp(G, G), 1);
+        assert_eq!(distance.cmp(T, T), 1);
 
-        assert_eq!(distance.cmp(&A, &C), -1);
-        assert_eq!(distance.cmp(&C, &G), -1);
-        assert_eq!(distance.cmp(&G, &T), -1);
-        assert_eq!(distance.cmp(&T, &A), -1);
+        assert_eq!(distance.cmp(A, C), -1);
+        assert_eq!(distance.cmp(C, G), -1);
+        assert_eq!(distance.cmp(G, T), -1);
+        assert_eq!(distance.cmp(T, A), -1);
     }
 }

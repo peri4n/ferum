@@ -2,7 +2,7 @@ pub mod dna;
 pub mod rna;
 
 pub trait Alphabet {
-    type Elems: Eq;
+    type Elems: Eq + Copy;
 
     const SIZE: usize;
 

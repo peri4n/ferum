@@ -43,7 +43,7 @@ where
 
         for i in 1..m {
             for j in 1..n {
-                let mat = matrix[i - 1][j - 1] + metric.cmp(seq1.at(i - 1), seq2.at(j - 1));
+                let mat = matrix[i - 1][j - 1] + metric.cmp(seq1[i - 1], seq2[j - 1]);
                 let del = matrix[i - 1][j] + metric.indel();
                 let ins = matrix[i][j - 1] + metric.indel();
 

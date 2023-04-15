@@ -26,15 +26,11 @@ impl<'a, A: Alphabet> Index<usize> for Seq<'a, A> {
     type Output = A::Elems;
 
     fn index(&self, index: usize) -> &Self::Output {
-        todo!()
+        self.alphabet.char(self.symbols[index])
     }
 }
 
 impl<'a, A: Alphabet> Seq<'a, A> {
-    pub fn at(&self, index: usize) -> &A::Elems {
-        self.alphabet.char(self.symbols[index])
-    }
-
     pub fn length(&self) -> usize {
         self.symbols.len()
     }
@@ -56,9 +52,9 @@ mod tests {
     fn is_accessible_by_index() {
         let seq: Seq<_> = "ACGT".into();
 
-        assert_eq!(seq.at(0), &A);
-        assert_eq!(seq.at(1), &C);
-        assert_eq!(seq.at(2), &G);
-        assert_eq!(seq.at(3), &T);
+        assert_eq!(seq[0], A);
+        assert_eq!(seq[1], C);
+        assert_eq!(seq[2], G);
+        assert_eq!(seq[3], T);
     }
 }

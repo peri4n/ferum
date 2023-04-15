@@ -1,6 +1,6 @@
 use super::Alphabet;
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Clone, Copy, Debug)]
 pub enum Nuc4 {
     A,
     C,
@@ -36,7 +36,7 @@ impl Alphabet for Dna4 {
 #[cfg(test)]
 mod tests {
     use super::Dna4;
-    use crate::bio::alphabet::dna::{Nuc4, NUCLEOTIDES4};
+    use crate::bio::alphabet::dna::{Nuc4::*, NUCLEOTIDES4};
     use crate::bio::alphabet::Alphabet;
     use crate::bio::sequence::Seq;
 
@@ -50,9 +50,9 @@ mod tests {
     fn create_new_seq() {
         let seq: Seq<_> = "acgt".into();
 
-        assert_eq!(seq.at(0), &Nuc4::A);
-        assert_eq!(seq.at(1), &Nuc4::C);
-        assert_eq!(seq.at(2), &Nuc4::G);
-        assert_eq!(seq.at(3), &Nuc4::T);
+        assert_eq!(seq[0], A);
+        assert_eq!(seq[1], C);
+        assert_eq!(seq[2], G);
+        assert_eq!(seq[3], T);
     }
 }

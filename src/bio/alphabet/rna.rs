@@ -1,6 +1,6 @@
 use super::Alphabet;
 
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone)]
 pub enum RNuc4 {
     A,
     C,
